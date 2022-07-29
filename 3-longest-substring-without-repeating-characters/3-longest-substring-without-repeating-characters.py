@@ -1,9 +1,6 @@
 def contain_duplicate(s):
-    hashmap = {}
     for char in s:
-        if char not in hashmap:
-            hashmap[char] = 1
-        else:
+        if s.count(char) != 1:
             return True
     return False
 
