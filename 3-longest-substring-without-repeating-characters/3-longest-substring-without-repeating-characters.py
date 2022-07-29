@@ -1,28 +1,25 @@
-def contain_duplicate(s):
-    for char in s:
-        if s.count(char) != 1:
-            return True
-    return False
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if s == "":
-            return 0
+        if(len(s)<=1):
+            return(len(s))
         
-        ret = 1
+        has ={}
+        current_len, max_len = 0,0
+        i,j = 0,0
         
-        for window_size in range(2, len(s) + 1):
-            stop = True
+        while(j<len(s)):
             
-            for i in range(len(s) - window_size + 1):
-                window = s[i:i + window_size]
-                if not contain_duplicate(window):
-                    stop = False
-                    break
+            while(s[j] in has):
+                has.pop(s[i])
+                i+=1
+                current_len -= 1
+                
+            if(s[j] not in has):
+                has[s[j]] = 1
+                current_len +=1
+                if(max_len < current_len):
+                    max_len = current_len
             
-            if stop:
-                break
-            else:
-                ret = window_size
-            
-        return ret
+            j +=1
+        
+        return(max_len)
